@@ -9,5 +9,8 @@
   "devDependencies": {
     "typescript": "^4.4.4",
     "vite": "^2.7.2"
+  },
+  "dependencies": {
+    "primeflex": "^3.1.2"
   }
 }
