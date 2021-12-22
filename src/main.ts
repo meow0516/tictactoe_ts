@@ -1,8 +1,10 @@
-import './style.css'
+import "./main.css";
+import "/node_modules/primeflex/primeflex.min.css";
+import "/node_modules/primeflex/themes/arya-blue.css";
 
-const app = document.querySelector<HTMLDivElement>('#app')!
+import TicTacToe from "./tictactoe";
 
-app.innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`
+window.onload = function () {
+  let game1 = new TicTacToe("game1");
+  game1.gameInit();
+};
