@@ -14,30 +14,30 @@ type Player = {
   name: string;
   chosenNumbers: Array<number>;
   mark: string;
+  color: string;
 };
 
 class TicTacToe {
   isOddPlayerTurn: Boolean;
-  usedNumber: number[];
+  usedNumber: Array<number>;
   players: { [x: string]: Player };
   id: string;
 
-  oddPlayerName: string = "";
-  oddPlayerColor: string = "";
-
-  constructor(id: string) {
+  constructor(id: string, oddPlayer: Player, evenPlayer: Player) {
     this.isOddPlayerTurn = true;
     this.usedNumber = [];
     this.players = {
       odd: {
-        name: "Odd",
+        name: oddPlayer.name,
         chosenNumbers: [],
-        mark: "O",
+        mark: oddPlayer.mark,
+        color: oddPlayer.color,
       },
       even: {
-        name: "Even",
+        name: evenPlayer.name,
         chosenNumbers: [],
-        mark: "X",
+        mark: evenPlayer.mark,
+        color: evenPlayer.color,
       },
     };
     this.id = id;
@@ -126,16 +126,13 @@ class TicTacToe {
   }
 
   submitValue(gameId: string) {
-    let inputValueDom = document
-      .getElementById(gameId)
-      ?.querySelector("#inputValue");
-    let inputValue = (inputValueDom as HTMLInputElement).valueAsNumber;
-
     const gameContainer = document.getElementById(gameId);
 
     if (gameContainer === null) {
       throw new Error("...");
     }
+    let inputValueDom = gameContainer.querySelector("#inputValue");
+    let inputValue = (inputValueDom as HTMLInputElement).valueAsNumber;
 
     let innerBoxes = gameContainer.querySelectorAll(".inner_ox_box");
 
@@ -167,6 +164,8 @@ class TicTacToe {
 
   markBox(box: Element, inputValue: number, player: Player) {
     box.textContent = player.mark;
+    box.classList.remove("bg-blue-700");
+    (box as HTMLElement).style.backgroundColor = player.color;
     this.usedNumber.push(inputValue);
     player.chosenNumbers.push(inputValue);
   }
@@ -184,16 +183,6 @@ class TicTacToe {
       window.location.reload();
     }
   }
-
-  // withOddPlayerName(name: string) {
-  //   this.oddPlayerName = name;
-  //   return this;
-  // }
-
-  // withOddPlayerColor(color: string) {
-  //   this.oddPlayerColor = color;
-  //   return this;
-  // }
 }
 
 export default TicTacToe;

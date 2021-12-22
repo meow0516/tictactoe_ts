@@ -5,6 +5,20 @@ import "/node_modules/primeflex/themes/arya-blue.css";
 import TicTacToe from "./tictactoe";
 
 window.onload = function () {
-  let game1 = new TicTacToe("game1");
+  let game1 = new TicTacToe(
+    "game1",
+    {
+      name: "Peko",
+      chosenNumbers: [],
+      mark: "@",
+      color: "blue",
+    },
+    {
+      name: "Marine",
+      chosenNumbers: [],
+      mark: "#",
+      color: "red",
+    }
+  );
   game1.gameInit();
 };
