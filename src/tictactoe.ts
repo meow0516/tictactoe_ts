@@ -17,27 +17,37 @@ type Player = {
   color: string;
 };
 
+type PlayerOption = {
+  name?: string;
+  mark?: string;
+  color?: string;
+};
+
 class TicTacToe {
   isOddPlayerTurn: Boolean;
   usedNumber: Array<number>;
   players: { [x: string]: Player };
   id: string;
 
-  constructor(id: string, oddPlayer: Player, evenPlayer: Player) {
+  constructor(
+    id: string,
+    oddPlayerOption?: PlayerOption,
+    evenPlayerOption?: PlayerOption
+  ) {
     this.isOddPlayerTurn = true;
     this.usedNumber = [];
     this.players = {
       odd: {
-        name: oddPlayer.name,
+        name: oddPlayerOption?.name ?? "Odd",
         chosenNumbers: [],
-        mark: oddPlayer.mark,
-        color: oddPlayer.color,
+        mark: oddPlayerOption?.mark ?? "O",
+        color: oddPlayerOption?.color ?? "",
       },
       even: {
-        name: evenPlayer.name,
+        name: evenPlayerOption?.name ?? "Even",
         chosenNumbers: [],
-        mark: evenPlayer.mark,
-        color: evenPlayer.color,
+        mark: evenPlayerOption?.mark ?? "X",
+        color: evenPlayerOption?.color ?? "",
       },
     };
     this.id = id;
@@ -164,8 +174,10 @@ class TicTacToe {
 
   markBox(box: Element, inputValue: number, player: Player) {
     box.textContent = player.mark;
-    box.classList.remove("bg-blue-700");
-    (box as HTMLElement).style.backgroundColor = player.color;
+    if (player.color) {
+      box.classList.remove("bg-blue-700");
+      (box as HTMLElement).style.backgroundColor = player.color;
+    }
     this.usedNumber.push(inputValue);
     player.chosenNumbers.push(inputValue);
   }

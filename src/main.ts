@@ -9,13 +9,11 @@ window.onload = function () {
     "game1",
     {
       name: "Peko",
-      chosenNumbers: [],
       mark: "@",
       color: "blue",
     },
     {
       name: "Marine",
-      chosenNumbers: [],
       mark: "#",
       color: "red",
     }
